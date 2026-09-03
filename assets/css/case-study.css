@@ -30,9 +30,14 @@
 .footer-nav a { display: inline-block; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid var(--accent1); padding-bottom: 4px; }
 
 /* ---------- imagery ---------- */
-.shot { margin: 26px 0 0; }
+.shot { margin: 26px 0 0; text-align: center; }
+/* Images vary from panoramic (4.9:1) to almost square (1:1). Capping the height
+   rather than forcing full width stops the square ones from eating a whole screen;
+   wide ones are still limited by the container. */
 .shot img {
-  display: block; width: 100%; height: auto;
-  border: 2px solid oklch(0.97 0.008 255 / 0.18); background: oklch(0.14 0.02 255);
+  display: block; margin: 0 auto;
+  width: auto; height: auto; max-width: 100%; max-height: 600px;
+  border: 2px solid oklch(0.97 0.008 255 / 0.18); border-radius: 4px;
+  background: oklch(0.14 0.02 255);
 }
 .shot figcaption { margin-top: 8px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
