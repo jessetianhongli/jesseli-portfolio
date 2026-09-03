@@ -18,3 +18,31 @@ body {
 a { color: inherit; text-decoration: none; }
 
 .display { font-family: 'Archivo Black', 'Arial Black', sans-serif; text-transform: uppercase; }
+
+/* ---------- nav: shared by the home page and every case-study page ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  padding: 20px clamp(20px, 5vw, 64px);
+  background: oklch(0.16 0.02 255 / 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid oklch(0.97 0.008 255 / 0.1);
+}
+.nav-inner {
+  max-width: 1440px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: clamp(16px, 3vw, 36px);
+}
+.mark {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 20px; letter-spacing: 0.02em;
+}
+.navlinks { display: flex; gap: clamp(16px, 3vw, 36px); }
+.navlinks a {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  opacity: 0.8; transition: opacity 0.2s, color 0.2s;
+}
+.navlinks a:hover { opacity: 1; color: var(--accent1); }
+.back {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  opacity: 0.75; transition: opacity 0.2s, color 0.2s; white-space: nowrap;
+}
+.back:hover { opacity: 1; color: var(--accent1); }
