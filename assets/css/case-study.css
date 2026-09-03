@@ -41,3 +41,11 @@
   background: oklch(0.14 0.02 255);
 }
 .shot figcaption { margin-top: 8px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
+
+/* ---------- rhythm against the divider lines ---------- */
+/* Everything that sits above a section's border-top should clear it by the same
+   amount. The section's own 44px padding provides that gap, so the last child in
+   a section contributes nothing extra, and the banner figure (which sits outside
+   any section, between the header and the first line) matches it explicitly. */
+.section > *:last-child { margin-bottom: 0; }
+.wrap > .shot { margin-bottom: 44px; }
