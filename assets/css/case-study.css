@@ -28,3 +28,13 @@
 
 .footer-nav { padding: 60px clamp(20px, 5vw, 64px) 80px; text-align: center; }
 .footer-nav a { display: inline-block; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid var(--accent1); padding-bottom: 4px; }
+
+/* ---------- imagery ---------- */
+.shot { margin: 26px 0 0; }
+.shot img {
+  display: block; width: 100%; height: auto;
+  border: 2px solid oklch(0.97 0.008 255 / 0.18); background: oklch(0.14 0.02 255);
+}
+.shot figcaption { margin-top: 8px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
+.shot-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 26px 0 0; }
+.shot-pair .shot { margin: 0; }
