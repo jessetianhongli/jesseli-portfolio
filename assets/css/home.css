@@ -274,4 +274,4 @@
 .work-card-inert { box-shadow: 8px 8px 0 oklch(0.45 0.015 250); border-color: oklch(0.72 0.015 250); }
 .work-card-inert:hover { transform: none; box-shadow: 8px 8px 0 oklch(0.45 0.015 250); }
 .work-card-inert .work-preview { opacity: 0.5; }
-.work-read-soon { margin-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
+.work-read-soon { margin-top: 4px; display: inline-flex; align-items: center; color: oklch(0.62 0.02 250); }
