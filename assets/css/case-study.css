@@ -24,6 +24,7 @@
 .section p { font-size: 17px; line-height: 1.75; color: oklch(0.87 0.01 250); margin: 0 0 16px; }
 .section ul { margin: 0 0 16px; padding-left: 20px; }
 .section li { font-size: 17px; line-height: 1.75; color: oklch(0.87 0.01 250); margin-bottom: 8px; }
+.section strong { color: oklch(0.97 0.008 255); font-weight: 700; }
 
 .outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 8px; }
 .outcome { border: 2px solid oklch(0.97 0.008 255 / 0.3); padding: 22px; }

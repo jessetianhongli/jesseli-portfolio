@@ -1,6 +1,6 @@
 # jesseli.design
 
-Source for Jesse Li's portfolio site. Plain HTML/CSS, no build step, no dependencies.
+Source for my portfolio site. Plain HTML/CSS, no build step, no dependencies.
 
 ## Structure
 
@@ -18,7 +18,9 @@ assets/
   media/toronto-poster.jpg                    hero video poster frame
 ```
 
-The three case-study pages are marked as drafts (see the note banner at the top of each) — the role, dates, company, and headline metrics are real, but the problem/process narrative is a placeholder written to show how a full case study would read. Anything underlined with a dashed border on those pages is a guess that needs to be replaced or confirmed with the real story before this goes live.
+The Winterview and Dyne case studies here are written from my own published case studies at jesseli.design/winterview and jesseli.design/dyne. The Zemoso page is still a placeholder: its narrative is written to show how a full case study would read, and I need to replace it with the real story.
+
+On every page, anything underlined with a dashed border (`.flag`) is an open question rather than a confirmed fact, and the note banner at the top of each page says what specifically is unresolved. I need to clear those before the site goes live.
 
 ## Running locally
 
@@ -38,4 +40,4 @@ then visit `http://localhost:8080/`.
 
 ## Deploying
 
-Push this repo to GitHub, then connect it to a static host (Cloudflare Pages, GitHub Pages, or Vercel all work with zero config since there's no build step) and point jesseli.design at it via your DNS settings.
+Push this repo to GitHub, then connect it to a static host (Cloudflare Pages, GitHub Pages, or Vercel all work with zero config since there's no build step) and point jesseli.design at it via DNS.
