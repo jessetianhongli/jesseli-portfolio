@@ -2,8 +2,6 @@
 
 .page { position: relative; overflow-x: clip; }
 
-/* Reduced-motion toggle: pure CSS, no script required (checkbox drives everything
-   via the :checked selector, which is real, reliable browser-native interactivity). */
 .motion-toggle-input {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
@@ -32,15 +30,6 @@
 
 /* Kill every animation/transition on the page instantly, either because the visitor's
    OS asks for reduced motion, or because they've flipped the toggle above. */
-@media (prefers-reduced-motion: reduce) {
-  .page-body, .page-body * {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 .motion-toggle-input:checked ~ .page-body,
 .motion-toggle-input:checked ~ .page-body * {
   animation-duration: 0.01ms !important;

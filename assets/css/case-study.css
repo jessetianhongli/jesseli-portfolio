@@ -40,7 +40,7 @@
   border: 2px solid oklch(0.97 0.008 255 / 0.18); border-radius: 10px;
   background: oklch(0.14 0.02 255);
 }
-.shot figcaption { margin-top: 10px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.72 0.02 250); }
+.shot figcaption { margin-top: 10px; font-size: 14px; font-weight: 600; line-height: 1.5; letter-spacing: 0.01em; color: oklch(0.76 0.02 250); }
 
 /* ---------- rhythm against the divider lines ---------- */
 /* Everything that sits above a section's border-top should clear it by the same
