@@ -88,10 +88,6 @@
       </ul>
       <p>These helped at the margins but didn't move the core problem, which was that the flow asked for too much at once regardless of how well each step was explained. Having the evidence that patches weren't enough is what made the case for restructuring.</p>
       <figure class="shot">
-        <img src="../../assets/media/dyne/one-time-tooltips.png" width="4096" height="2135" alt="One-time tooltips guiding first-run users" loading="lazy" decoding="async">
-        <figcaption>One-time tooltips for first-run guidance</figcaption>
-      </figure>
-      <figure class="shot">
         <img src="../../assets/media/dyne/coupon-marketplace.png" width="4096" height="2134" alt="Failure points in the coupon marketplace" loading="lazy" decoding="async">
         <figcaption>In-flow coupon purchase, one of the low-effort fixes</figcaption>
       </figure>
@@ -106,13 +102,31 @@
         <li><strong>Group related actions.</strong> Cluster decisions that belong together so users switch context less.</li>
       </ul>
       <p>The modularized flow addressed both segments at once. Coupon options were scoped to the selected restaurant, which cut the choice down to what was actually relevant and folded the purchase into the flow instead of before it. Related actions were grouped into digestible stages, so new users met unfamiliar content a little at a time.</p>
+
+      <div class="swap">
+        <input class="swap-radio" type="radio" name="dydemo" id="dy-patch" checked>
+        <input class="swap-radio" type="radio" name="dydemo" id="dy-rebuild">
+        <div class="swap-switch" role="group" aria-label="Compare patching the flow with rebuilding it">
+          <label for="dy-patch">Patched</label>
+          <label for="dy-rebuild">Rebuilt</label>
+        </div>
+        <div class="swap-pane" data-pane="patch">
+          <figure class="shot">
+            <img src="../../assets/media/dyne/one-time-tooltips.png" width="4096" height="2135" alt="One-time tooltips guiding first-run users through the original flow" loading="lazy" decoding="async">
+            <figcaption>One-time tooltips explaining the existing steps</figcaption>
+          </figure>
+        </div>
+        <div class="swap-pane" data-pane="rebuild">
+          <figure class="shot">
+            <img src="../../assets/media/dyne/redesign-2.png" width="4096" height="1818" alt="The redesigned modular meetup creation flow" loading="lazy" decoding="async">
+            <figcaption>The same task, broken into modular stages</figcaption>
+          </figure>
+        </div>
+        <p class="swap-note">The patch explained the flow better. The rebuild meant there was less to explain.</p>
+      </div>
       <figure class="shot">
         <img src="../../assets/media/dyne/instagram-reference.png" width="3904" height="2696" alt="Instagram's post creation flow" loading="lazy" decoding="async">
         <figcaption>Instagram, used as a structural reference</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="../../assets/media/dyne/redesign-2.png" width="4096" height="1818" alt="The redesigned meetup creation flow" loading="lazy" decoding="async">
-        <figcaption>The modularized flow</figcaption>
       </figure>
     </div>
 

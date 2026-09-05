@@ -65,13 +65,19 @@
 /* ---------- swap: two versions, one frame ---------- */
 /* Pure CSS via radio inputs, matching the reduced-motion toggle on the home page.
    Works with no JavaScript at all. */
-.swap { border: 2px solid oklch(0.97 0.008 255 / 0.22); background: oklch(0.14 0.02 255); margin: 28px 0 0; }
+.swap {
+  margin: 28px 0 0;
+  background: oklch(0.235 0.012 255);
+  border: 1px solid oklch(0.97 0.008 255 / 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+}
 .swap-radio { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.swap-switch { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px; border-bottom: 2px solid oklch(0.97 0.008 255 / 0.15); }
+.swap-switch { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px; border-bottom: 1px solid oklch(0.97 0.008 255 / 0.14); }
 .swap-switch label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   padding: 9px 15px; border: 1px solid oklch(0.97 0.008 255 / 0.25);
-  color: oklch(0.72 0.02 250); cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s;
+  color: oklch(0.72 0.02 250); border-radius: 6px; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 .swap-switch label:hover { color: oklch(0.97 0.008 255); border-color: oklch(0.97 0.008 255 / 0.5); }
 .swap-pane { display: none; padding: 22px 20px; }
@@ -80,13 +86,19 @@
 
 /* One rule per option: the checked radio reveals its pane and lights its label. */
 #wv-star:checked ~ .swap-pane[data-pane="star"],
-#wv-cq:checked   ~ .swap-pane[data-pane="cq"] { display: block; }
+#wv-cq:checked   ~ .swap-pane[data-pane="cq"],
+#dy-patch:checked   ~ .swap-pane[data-pane="patch"],
+#dy-rebuild:checked ~ .swap-pane[data-pane="rebuild"] { display: block; }
 #wv-star:checked ~ .swap-switch label[for="wv-star"],
-#wv-cq:checked   ~ .swap-switch label[for="wv-cq"] {
+#wv-cq:checked   ~ .swap-switch label[for="wv-cq"],
+#dy-patch:checked   ~ .swap-switch label[for="dy-patch"],
+#dy-rebuild:checked ~ .swap-switch label[for="dy-rebuild"] {
   background: var(--accent1); border-color: var(--accent1); color: oklch(0.16 0.02 255);
 }
 #wv-star:focus-visible ~ .swap-switch label[for="wv-star"],
-#wv-cq:focus-visible   ~ .swap-switch label[for="wv-cq"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
+#wv-cq:focus-visible   ~ .swap-switch label[for="wv-cq"],
+#dy-patch:focus-visible   ~ .swap-switch label[for="dy-patch"],
+#dy-rebuild:focus-visible ~ .swap-switch label[for="dy-rebuild"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
 
 /* the mock form inside the Winterview demo */
 .mock-field { margin-bottom: 14px; }
@@ -94,8 +106,8 @@
 .mock-field label { display: block; font-size: 13px; font-weight: 700; color: oklch(0.9 0.01 250); margin-bottom: 6px; }
 .mock-field input, .mock-field textarea {
   width: 100%; padding: 11px 13px; font: inherit; font-size: 15px;
-  color: oklch(0.95 0.008 255); background: oklch(0.19 0.02 255);
-  border: 1px solid oklch(0.97 0.008 255 / 0.25); border-radius: 4px;
+  color: oklch(0.95 0.008 255); background: oklch(0.18 0.02 255);
+  border: 1px solid oklch(0.97 0.008 255 / 0.22); border-radius: 6px;
 }
 .mock-field input:focus-visible, .mock-field textarea:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
 .mock-field textarea { min-height: 74px; resize: vertical; }
