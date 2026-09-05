@@ -17,6 +17,7 @@ assets/
   css/home.css                                home page styles
   css/case-study.css                          shared case-study styles
   css/resume.css                              résumé styles
+  js/enhance.js                               lightbox (progressive enhancement)
   media/toronto.mp4                           hero background video
   media/toronto-poster.jpg                    hero video poster frame
   media/winterview/                           Winterview case-study screenshots

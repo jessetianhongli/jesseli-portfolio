@@ -39,6 +39,15 @@
       <div class="head-metric"><span class="num">+34%</span><span class="lbl">adoption of Resume Booster</span></div>
     </div>
 
+    <dl class="tldr">
+      <dt>The problem</dt>
+      <dd>Resume Booster wasn&rsquo;t getting used. The people who needed it most left out the details that make a bullet land, and the tool had no way to ask for them.</dd>
+      <dt>The call</dt>
+      <dd>We shipped the STAR framework first and usability testing killed it. I replaced teaching users a structure with asking them one plain question at a time.</dd>
+      <dt>The outcome</dt>
+      <dd>Adoption rose 34% to a 57% rate, with 84% CSAT across 200+ surveyed users.</dd>
+    </dl>
+
       <figure class="shot">
         <img src="../../assets/media/winterview/hero-resume-feature.png" width="2800" height="1804" alt="The Winterview Resume Booster feature" loading="eager" decoding="async">
         <figcaption>Resume Booster, the feature this work sits inside</figcaption>
@@ -50,7 +59,8 @@
       <p>The question we set out to answer: how might we help users fill in key information gaps?</p>
     </div>
 
-    <div class="section">
+    <div class="section wrong">
+      <p class="wrong-label">What didn&rsquo;t work</p>
       <h2>The first answer was wrong</h2>
       <p>We started with STAR, the Situation-Task-Action-Result framework that resume advice has recommended for decades. Users filled in each element in sequence, and the AI synthesized the four answers into a finished bullet. On paper it was the obvious solution: a proven framework, a clean mapping to model input, an interface that practically designed itself.</p>
       <p>Usability testing took it apart. Three findings, none of them survivable:</p>
@@ -60,13 +70,67 @@
         <li><strong>The math didn't work.</strong> One STAR bullet took about ten minutes. A full resume would have run to roughly ninety. Nobody was going to spend an afternoon on it.</li>
       </ul>
       <p>The framework that was supposed to reduce effort had become the effort.</p>
+
+      <div class="swap">
+        <input class="swap-radio" type="radio" name="wvdemo" id="wv-star" checked>
+        <input class="swap-radio" type="radio" name="wvdemo" id="wv-cq">
+        <div class="swap-switch" role="group" aria-label="Compare the two approaches">
+          <label for="wv-star">STAR format</label>
+          <label for="wv-cq">Clarifying question</label>
+        </div>
+        <div class="swap-pane" data-pane="star">
+          <p class="mock-count">Four fields to fill, in order</p>
+          <div class="mock-field"><label for="d-sit">Situation</label><textarea id="d-sit"></textarea></div>
+          <div class="mock-field"><label for="d-task">Task</label><textarea id="d-task"></textarea></div>
+          <div class="mock-field"><label for="d-act">Action</label><textarea id="d-act"></textarea></div>
+          <div class="mock-field"><label for="d-res">Result</label><textarea id="d-res"></textarea></div>
+        </div>
+        <div class="swap-pane" data-pane="cq">
+          <p class="mock-count">One question, answered in a sentence</p>
+          <div class="mock-field"><label for="d-cq">At CUS, how much did your idea save on catering during the Charity Dinner event?</label><textarea id="d-cq"></textarea></div>
+        </div>
+        <p class="swap-note">Both produce the same finished bullet. The difference is what the user has to know before they can start.</p>
+      </div>
+
+      <figure class="chart">
+        <h3>Time to fill one field</h3>
+        <p class="chart-sub">Measured in usability testing, against the two-minute benchmark.</p>
+        <svg viewBox="0 0 640 140" role="img" aria-labelledby="wvcT wvcD">
+          <title id="wvcT">Time to fill one field</title>
+          <desc id="wvcD">The two-minute benchmark compared with up to four minutes measured for a single STAR field.</desc>
+          <line x1="180" y1="12" x2="180" y2="124" stroke="oklch(0.97 0.008 255 / 0.25)" stroke-width="1"/>
+          <g>
+            <title>Benchmark: 2 minutes</title>
+            <text x="168" y="45" text-anchor="end" font-size="13" fill="oklch(0.80 0.015 250)">Benchmark</text>
+            <rect x="180" y="26" width="168" height="28" rx="4" fill="oklch(0.55 0.02 250)"/>
+            <text x="358" y="45" font-size="13" font-weight="700" fill="oklch(0.90 0.01 250)">2 min</text>
+          </g>
+          <g>
+            <title>STAR field, measured: up to 4 minutes</title>
+            <text x="168" y="107" text-anchor="end" font-size="13" fill="oklch(0.80 0.015 250)">STAR field</text>
+            <rect x="180" y="88" width="336" height="28" rx="4" fill="#4ea8ff"/>
+            <text x="526" y="107" font-size="13" font-weight="700" fill="oklch(0.90 0.01 250)">up to 4 min</text>
+          </g>
+        </svg>
+        <table class="visually-hidden">
+          <caption>Time to fill one field</caption>
+          <tbody>
+            <tr><th scope="row">Benchmark</th><td>2 minutes</td></tr>
+            <tr><th scope="row">STAR field, measured</th><td>up to 4 minutes</td></tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <p class="stat-hero"><span class="num">~90 min</span><span class="lbl">Projected time to complete a full resume at roughly ten minutes per STAR bullet.</span></p>
       <figure class="shot">
         <img src="../../assets/media/winterview/star-methodology.png" width="1255" height="1248" alt="The STAR flow, with separate fields for Situation, Task, Action and Result" loading="lazy" decoding="async">
         <figcaption>The STAR flow: four fields, filled in sequence</figcaption>
       </figure>
-      <figure class="shot">
-        <img src="../../assets/media/winterview/usability-testing.png" width="1052" height="453" alt="Usability testing findings for the STAR flow" loading="lazy" decoding="async">
-        <figcaption>Testers by STAR element: most could not complete Task, Action or Result</figcaption>
+      <figure class="shot shot--wide">
+        <a class="shot-zoom" href="../../assets/media/winterview/usability-testing.png">
+          <img src="../../assets/media/winterview/usability-testing.png" width="1052" height="453" alt="Usability testing findings for the STAR flow" loading="lazy" decoding="async">
+        </a>
+        <figcaption>Testers by STAR element: most could not complete Task, Action or Result<span class="shot-hint">Click to enlarge</span></figcaption>
       </figure>
     </div>
 
@@ -116,5 +180,6 @@
   </div>
 
   <div class="footer-nav"><a href="../../index.html#work">&larr; Back to selected work</a></div>
+  <script src="../../assets/js/enhance.js" defer></script>
 </body>
 </html>

@@ -49,3 +49,79 @@
    any section, between the header and the first line) matches it explicitly. */
 .section > *:last-child { margin-bottom: 0; }
 .wrap > .shot { margin-bottom: 44px; }
+
+/* ---------- the short version ---------- */
+.tldr { border-left: 3px solid var(--accent1); padding-left: 22px; margin: 0 0 6px; }
+.tldr dt { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
+.tldr dd { margin: 3px 0 14px; font-size: 16px; line-height: 1.6; color: oklch(0.9 0.01 250); max-width: 70ch; }
+.tldr dd:last-child { margin-bottom: 0; }
+
+/* ---------- "what I got wrong" ---------- */
+/* A recurring block, not a one-off: the same treatment in every case study that
+   has a failed approach worth showing. */
+.section.wrong { border-left: 3px solid var(--accent2); padding-left: 26px; }
+.wrong-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin: 0 0 10px; }
+
+/* ---------- swap: two versions, one frame ---------- */
+/* Pure CSS via radio inputs, matching the reduced-motion toggle on the home page.
+   Works with no JavaScript at all. */
+.swap { border: 2px solid oklch(0.97 0.008 255 / 0.22); background: oklch(0.14 0.02 255); margin: 28px 0 0; }
+.swap-radio { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.swap-switch { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px; border-bottom: 2px solid oklch(0.97 0.008 255 / 0.15); }
+.swap-switch label {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 9px 15px; border: 1px solid oklch(0.97 0.008 255 / 0.25);
+  color: oklch(0.72 0.02 250); cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.swap-switch label:hover { color: oklch(0.97 0.008 255); border-color: oklch(0.97 0.008 255 / 0.5); }
+.swap-pane { display: none; padding: 22px 20px; }
+.swap-note { margin: 0; padding: 0 20px 20px; font-size: 14px; line-height: 1.6; color: oklch(0.68 0.02 250); }
+.swap-pane .shot { margin: 0; }
+
+/* One rule per option: the checked radio reveals its pane and lights its label. */
+#wv-star:checked ~ .swap-pane[data-pane="star"],
+#wv-cq:checked   ~ .swap-pane[data-pane="cq"] { display: block; }
+#wv-star:checked ~ .swap-switch label[for="wv-star"],
+#wv-cq:checked   ~ .swap-switch label[for="wv-cq"] {
+  background: var(--accent1); border-color: var(--accent1); color: oklch(0.16 0.02 255);
+}
+#wv-star:focus-visible ~ .swap-switch label[for="wv-star"],
+#wv-cq:focus-visible   ~ .swap-switch label[for="wv-cq"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+/* the mock form inside the Winterview demo */
+.mock-field { margin-bottom: 14px; }
+.mock-field:last-child { margin-bottom: 0; }
+.mock-field label { display: block; font-size: 13px; font-weight: 700; color: oklch(0.9 0.01 250); margin-bottom: 6px; }
+.mock-field input, .mock-field textarea {
+  width: 100%; padding: 11px 13px; font: inherit; font-size: 15px;
+  color: oklch(0.95 0.008 255); background: oklch(0.19 0.02 255);
+  border: 1px solid oklch(0.97 0.008 255 / 0.25); border-radius: 4px;
+}
+.mock-field input:focus-visible, .mock-field textarea:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+.mock-field textarea { min-height: 74px; resize: vertical; }
+.mock-count { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.62 0.02 250); margin: 0 0 16px; }
+
+/* ---------- chart ---------- */
+.chart { margin: 28px 0 0; }
+.chart h3 { font-size: 15px; margin: 0 0 4px; }
+.chart-sub { font-size: 13px; color: oklch(0.66 0.02 250); margin: 0 0 14px; }
+.chart svg { display: block; width: 100%; height: auto; max-width: 640px; }
+.stat-hero { margin-top: 24px; border: 2px solid oklch(0.97 0.008 255 / 0.3); padding: 20px 22px; display: inline-block; }
+.stat-hero .num { font-family: 'Archivo Black', sans-serif; font-size: 2.4rem; color: var(--accent2); line-height: 1; }
+.stat-hero .lbl { display: block; margin-top: 8px; font-size: 13px; color: oklch(0.72 0.02 250); max-width: 42ch; }
+
+/* ---------- wide artifacts + zoom ---------- */
+/* The research artifacts are dense; they get more room and open full size. */
+.shot--wide { width: min(1360px, calc(100vw - 40px)); margin-left: 50%; transform: translateX(-50%); }
+.shot--wide img { max-height: 760px; }
+.shot-zoom { display: block; cursor: zoom-in; }
+.shot-zoom:focus-visible { outline: 2px solid var(--accent1); outline-offset: 4px; }
+.shot-hint { display: block; margin-top: 6px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.58 0.02 250); }
+
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; background: oklch(0.1 0.02 255 / 0.94); }
+.lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 6px; }
+.lightbox-close {
+  position: absolute; top: 18px; right: 18px; padding: 10px 16px; font: inherit;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: oklch(0.16 0.02 255); background: var(--accent1); border: 0; cursor: pointer;
+}
