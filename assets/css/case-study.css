@@ -154,3 +154,9 @@
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   color: oklch(0.16 0.02 255); background: var(--accent1); border: 0; cursor: pointer;
 }
+
+/* ---------- page transitions ---------- */
+/* Matches the name on the home page's card image so the two morph. Only the
+   banner figure is a direct child of .wrap, so this can't catch a body image. */
+.wrap > .shot img[src*="winterview/hero-resume-feature"] { view-transition-name: shot-winterview; }
+.wrap > .shot img[src*="dyne/hero-meetup-feature"] { view-transition-name: shot-dyne; }

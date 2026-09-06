@@ -96,7 +96,13 @@ button:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    /* fall off any scroll timeline, so the collapsed duration above applies */
+    animation-timeline: auto !important;
   }
+  /* and hold the page still across navigations */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
 }
 
 /* Shown only on paper (the portfolio URL on the résumé). */
@@ -113,3 +119,7 @@ button:focus-visible,
   border: 2px solid oklch(0.97 0.008 255); padding: 12px 20px;
 }
 .notfound-links a:hover { border-color: var(--accent1); color: var(--accent1); }
+
+/* ---------- cross-document view transitions ---------- */
+/* Opts every page in. Browsers without support just navigate normally. */
+@view-transition { navigation: auto; }
