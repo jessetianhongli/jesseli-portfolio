@@ -79,26 +79,6 @@
       <p class="wrong-label">What didn&rsquo;t work</p>
       <h2>The first answer was wrong</h2>
       <p>I started with STAR, the Situation-Task-Action-Result framework that resume advice has recommended for decades. Users filled in each element in sequence, and the AI synthesized the four answers into a finished bullet. On paper it was the obvious solution: a proven framework, a clean mapping to model input, an interface that practically designed itself.</p>
-      <div class="swap">
-        <input class="swap-radio" type="radio" name="wvdemo" id="wv-star" checked>
-        <input class="swap-radio" type="radio" name="wvdemo" id="wv-cq">
-        <div class="swap-switch" role="group" aria-label="Compare the two approaches">
-          <label for="wv-star">STAR format</label>
-          <label for="wv-cq">Clarifying question</label>
-        </div>
-        <div class="swap-pane" data-pane="star">
-          <p class="mock-count">Four fields to fill, in order</p>
-          <div class="mock-field"><label for="d-sit">Situation</label><textarea id="d-sit"></textarea></div>
-          <div class="mock-field"><label for="d-task">Task</label><textarea id="d-task"></textarea></div>
-          <div class="mock-field"><label for="d-act">Action</label><textarea id="d-act"></textarea></div>
-          <div class="mock-field"><label for="d-res">Result</label><textarea id="d-res"></textarea></div>
-        </div>
-        <div class="swap-pane" data-pane="cq">
-          <p class="mock-count">One question, answered in a sentence</p>
-          <div class="mock-field"><label for="d-cq">At CUS, how much did your idea save on catering during the Charity Dinner event?</label><textarea id="d-cq"></textarea></div>
-        </div>
-        <p class="swap-note">Both produce the same finished bullet. The difference is what the user has to know before they can start.</p>
-      </div>
       <figure class="shot">
         <img src="../../assets/media/winterview/star-methodology.png" width="1255" height="1248" alt="The STAR flow, with separate fields for Situation, Task, Action and Result" loading="lazy" decoding="async">
         <figcaption>The STAR flow: four fields, filled in sequence</figcaption>
@@ -155,6 +135,27 @@
       <h2>What I shipped instead</h2>
       <p>I dropped the framework and asked directly for what was missing. Instead of teaching users a four-part structure, the tool asks one plain question at a time, pointed at the specific gap in the bullet in front of them, like <em>&ldquo;What % did you improve X by?&rdquo;</em></p>
       <p>The shift is that the user no longer has to know what a good bullet is made of. The system knows what it's missing and asks for that one thing. Answering takes a sentence, not a taxonomy.</p>
+
+      <div class="swap">
+        <input class="swap-radio" type="radio" name="wvdemo" id="wv-star" checked>
+        <input class="swap-radio" type="radio" name="wvdemo" id="wv-cq">
+        <div class="swap-switch" role="group" aria-label="Compare the two approaches">
+          <label for="wv-star">STAR format</label>
+          <label for="wv-cq">Clarifying question</label>
+        </div>
+        <div class="swap-pane" data-pane="star">
+          <p class="mock-count">Four fields to fill, in order</p>
+          <div class="mock-field"><label for="d-sit">Situation</label><textarea id="d-sit"></textarea></div>
+          <div class="mock-field"><label for="d-task">Task</label><textarea id="d-task"></textarea></div>
+          <div class="mock-field"><label for="d-act">Action</label><textarea id="d-act"></textarea></div>
+          <div class="mock-field"><label for="d-res">Result</label><textarea id="d-res"></textarea></div>
+        </div>
+        <div class="swap-pane" data-pane="cq">
+          <p class="mock-count">One question, answered in a sentence</p>
+          <div class="mock-field"><label for="d-cq">At CUS, how much did your idea save on catering during the Charity Dinner event?</label><textarea id="d-cq"></textarea></div>
+        </div>
+        <p class="swap-note">Both produce the same finished bullet. The difference is what the user has to know before they can start.</p>
+      </div>
       <figure class="shot">
         <img src="../../assets/media/winterview/golden-path.png" width="4096" height="1769" alt="The golden path a user takes through a clarifying question" loading="lazy" decoding="async">
         <figcaption>Where clarifying questions sit in the golden path</figcaption>
