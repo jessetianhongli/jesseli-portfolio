@@ -88,17 +88,34 @@
 #wv-star:checked ~ .swap-pane[data-pane="star"],
 #wv-cq:checked   ~ .swap-pane[data-pane="cq"],
 #dy-patch:checked   ~ .swap-pane[data-pane="patch"],
-#dy-rebuild:checked ~ .swap-pane[data-pane="rebuild"] { display: block; }
+#dy-rebuild:checked ~ .swap-pane[data-pane="rebuild"],
+#pr-raw:checked   ~ .swap-pane[data-pane="raw"],
+#pr-boost:checked ~ .swap-pane[data-pane="boost"],
+#rf-def:checked   ~ .swap-pane[data-pane="def"],
+#rf-ex:checked    ~ .swap-pane[data-pane="ex"] { display: block; }
 #wv-star:checked ~ .swap-switch label[for="wv-star"],
 #wv-cq:checked   ~ .swap-switch label[for="wv-cq"],
 #dy-patch:checked   ~ .swap-switch label[for="dy-patch"],
-#dy-rebuild:checked ~ .swap-switch label[for="dy-rebuild"] {
+#dy-rebuild:checked ~ .swap-switch label[for="dy-rebuild"],
+#pr-raw:checked   ~ .swap-switch label[for="pr-raw"],
+#pr-boost:checked ~ .swap-switch label[for="pr-boost"],
+#rf-def:checked   ~ .swap-switch label[for="rf-def"],
+#rf-ex:checked    ~ .swap-switch label[for="rf-ex"] {
   background: var(--accent1); border-color: var(--accent1); color: oklch(0.16 0.02 255);
 }
 #wv-star:focus-visible ~ .swap-switch label[for="wv-star"],
 #wv-cq:focus-visible   ~ .swap-switch label[for="wv-cq"],
 #dy-patch:focus-visible   ~ .swap-switch label[for="dy-patch"],
-#dy-rebuild:focus-visible ~ .swap-switch label[for="dy-rebuild"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
+#dy-rebuild:focus-visible ~ .swap-switch label[for="dy-rebuild"],
+#pr-raw:focus-visible   ~ .swap-switch label[for="pr-raw"],
+#pr-boost:focus-visible ~ .swap-switch label[for="pr-boost"],
+#rf-def:focus-visible   ~ .swap-switch label[for="rf-def"],
+#rf-ex:focus-visible    ~ .swap-switch label[for="rf-ex"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+/* copy and single-bullet panes */
+.swap-copy { margin: 0 0 14px; font-size: 16px; line-height: 1.65; color: oklch(0.88 0.01 250); max-width: 68ch; }
+.mock-bullet { margin: 0; font-size: 16px; line-height: 1.65; color: oklch(0.92 0.01 250); max-width: 68ch; }
+.mock-bullet::before { content: '‚2'; color: var(--accent1); font-weight: 700; margin-right: 10px; }
 
 /* the mock form inside the Winterview demo */
 .mock-field { margin-bottom: 14px; }

@@ -57,20 +57,28 @@
       <h2>The problem</h2>
       <p>Winterview's Resume Booster turns a user's raw experience into polished resume bullets. It wasn't getting used. The people who needed it most, users who didn't already know resume best practices, were the ones who struggled: they left out the details that make a bullet land, and the tool had no way to ask for them.</p>
       <p>The question I set out to answer: how do you help users fill in key information gaps?</p>
+
+      <div class="swap">
+        <input class="swap-radio" type="radio" name="prdemo" id="pr-raw" checked>
+        <input class="swap-radio" type="radio" name="prdemo" id="pr-boost">
+        <div class="swap-switch" role="group" aria-label="Compare a raw bullet with a boosted one">
+          <label for="pr-raw">What users wrote</label>
+          <label for="pr-boost">After a clarifying question</label>
+        </div>
+        <div class="swap-pane" data-pane="raw">
+          <p class="mock-bullet">Organized the annual charity dinner for the student union.</p>
+        </div>
+        <div class="swap-pane" data-pane="boost">
+          <p class="mock-bullet">Saved CUS approximately $2,000 CAD on catering for the Charity Dinner for Orphans by negotiating vendor discounts and reworking the menu to cut waste.</p>
+        </div>
+        <p class="swap-note">Same experience, same person. The gap between them is one question the tool never asked. Example text drawn from the shipped feature.</p>
+      </div>
     </div>
 
     <div class="section wrong">
       <p class="wrong-label">What didn&rsquo;t work</p>
       <h2>The first answer was wrong</h2>
       <p>I started with STAR, the Situation-Task-Action-Result framework that resume advice has recommended for decades. Users filled in each element in sequence, and the AI synthesized the four answers into a finished bullet. On paper it was the obvious solution: a proven framework, a clean mapping to model input, an interface that practically designed itself.</p>
-      <p>Usability testing took it apart. Three findings, none of them survivable:</p>
-      <ul>
-        <li><strong>It was too much thinking.</strong> Users spent up to four minutes on a single field against a two-minute benchmark. Being asked to classify their own experience into &ldquo;Situation&rdquo; versus &ldquo;Task&rdquo; was harder than writing the bullet unaided.</li>
-        <li><strong>Users didn't buy the premise.</strong> Many were skeptical the suggestions were worth the effort, and questioned whether their resume was really the problem in the first place.</li>
-        <li><strong>The math didn't work.</strong> One STAR bullet took about ten minutes. A full resume would have run to roughly ninety. Nobody was going to spend an afternoon on it.</li>
-      </ul>
-      <p>The framework that was supposed to reduce effort had become the effort.</p>
-
       <div class="swap">
         <input class="swap-radio" type="radio" name="wvdemo" id="wv-star" checked>
         <input class="swap-radio" type="radio" name="wvdemo" id="wv-cq">
@@ -91,7 +99,21 @@
         </div>
         <p class="swap-note">Both produce the same finished bullet. The difference is what the user has to know before they can start.</p>
       </div>
+      <figure class="shot">
+        <img src="../../assets/media/winterview/star-methodology.png" width="1255" height="1248" alt="The STAR flow, with separate fields for Situation, Task, Action and Result" loading="lazy" decoding="async">
+        <figcaption>The STAR flow: four fields, filled in sequence</figcaption>
+      </figure>
+    </div>
 
+    <div class="section">
+      <h2>What testing found</h2>
+      <p>I put the STAR flow in front of users. Three findings came back, none of them survivable:</p>
+      <ul>
+        <li><strong>It was too much thinking.</strong> Users spent up to four minutes on a single field against a two-minute benchmark. Being asked to classify their own experience into &ldquo;Situation&rdquo; versus &ldquo;Task&rdquo; was harder than writing the bullet unaided.</li>
+        <li><strong>Users didn't buy the premise.</strong> Many were skeptical the suggestions were worth the effort, and questioned whether their resume was really the problem in the first place.</li>
+        <li><strong>The math didn't work.</strong> One STAR bullet took about ten minutes. A full resume would have run to roughly ninety. Nobody was going to spend an afternoon on it.</li>
+      </ul>
+      <p>The framework that was supposed to reduce effort had become the effort.</p>
       <figure class="chart">
         <h3>Time to fill one field</h3>
         <p class="chart-sub">Measured in usability testing, against the two-minute benchmark.</p>
@@ -120,12 +142,7 @@
           </tbody>
         </table>
       </figure>
-
       <p class="stat-hero"><span class="num">~90 min</span><span class="lbl">Projected time to complete a full resume at roughly ten minutes per STAR bullet.</span></p>
-      <figure class="shot">
-        <img src="../../assets/media/winterview/star-methodology.png" width="1255" height="1248" alt="The STAR flow, with separate fields for Situation, Task, Action and Result" loading="lazy" decoding="async">
-        <figcaption>The STAR flow: four fields, filled in sequence</figcaption>
-      </figure>
       <figure class="shot shot--wide">
         <a class="shot-zoom" href="../../assets/media/winterview/usability-testing.png">
           <img src="../../assets/media/winterview/usability-testing.png" width="1052" height="453" alt="Usability testing findings for the STAR flow" loading="lazy" decoding="async">
@@ -150,18 +167,29 @@
 
     <div class="section">
       <h2>Two refinements after launch</h2>
-      <ul>
-        <li><strong>In-context definitions.</strong> Users weren't always sure why a question was being asked or what a good answer looked like, so I explained the intent inline rather than making them guess.</li>
-        <li><strong>Editable placeholder examples.</strong> Power users, the ones writing three or more resumes a day, didn't need to start from a blank field every time. Pre-filled examples they could edit down cut the repetition out of high-volume work.</li>
-      </ul>
+      <p>Two changes once it was live: one for users who weren&rsquo;t sure what a question was asking, one for the people writing three or more resumes a day.</p>
+      <div class="swap">
+        <input class="swap-radio" type="radio" name="rfdemo" id="rf-def" checked>
+        <input class="swap-radio" type="radio" name="rfdemo" id="rf-ex">
+        <div class="swap-switch" role="group" aria-label="Compare the two refinements">
+          <label for="rf-def">In-context definitions</label>
+          <label for="rf-ex">Editable examples</label>
+        </div>
+        <div class="swap-pane" data-pane="def">
+          <p class="swap-copy">Users weren't always sure why a question was being asked or what a good answer looked like, so I explained the intent inline rather than making them guess.</p>
       <figure class="shot">
         <img src="../../assets/media/winterview/hover-tooltip.png" width="1401" height="900" alt="A tooltip explaining why a clarifying question is being asked" loading="lazy" decoding="async">
         <figcaption>In-context definitions explain the intent</figcaption>
       </figure>
+        </div>
+        <div class="swap-pane" data-pane="ex">
+          <p class="swap-copy">Power users, the ones writing three or more resumes a day, didn't need to start from a blank field every time. Pre-filled examples they could edit down cut the repetition out of high-volume work.</p>
       <figure class="shot">
         <img src="../../assets/media/winterview/editable-placeholder.png" width="2800" height="1802" alt="An editable placeholder example inside a clarifying question field" loading="lazy" decoding="async">
         <figcaption>Editable examples for high-volume users</figcaption>
       </figure>
+        </div>
+      </div>
     </div>
 
     <div class="section">
