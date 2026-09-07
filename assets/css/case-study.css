@@ -155,8 +155,5 @@
   color: oklch(0.16 0.02 255); background: var(--accent1); border: 0; cursor: pointer;
 }
 
-/* ---------- page transitions ---------- */
-/* Matches the name on the home page's card image so the two morph. Only the
-   banner figure is a direct child of .wrap, so this can't catch a body image. */
-.wrap > .shot img[src*="winterview/hero-resume-feature"] { view-transition-name: shot-winterview; }
-.wrap > .shot img[src*="dyne/hero-meetup-feature"] { view-transition-name: shot-dyne; }
+/* Per-image view-transition morph was tried and removed - see home.css's
+   "page transitions" comment. The site-wide crossfade from base.css still runs. */

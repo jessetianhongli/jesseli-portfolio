@@ -305,11 +305,13 @@
 .work-card:focus-visible .work-preview img { transform: scale(1.04); }
 
 /* ---------- page transitions ---------- */
-/* The card's screenshot and the case study's banner are the same file, so naming
-   both lets the browser morph one into the other across the navigation. */
-.work-preview img[src*="winterview"] { view-transition-name: shot-winterview; }
-.work-preview img[src*="dyne"] { view-transition-name: shot-dyne; }
-
+/* Tried naming the card image and the case-study banner the same, so the browser
+   would morph one into the other across the navigation. Removed: the card crops
+   to a 16:9 box via object-fit:cover, the banner shows the full image at its own
+   aspect ratio (1.55:1 / 2.08:1, neither close to 16:9) with no crop at all -
+   morphing a small cropped sliver into a large uncropped rectangle of a different
+   shape looked warped rather than smooth. The whole-page crossfade from
+   base.css's @view-transition rule still applies; only the per-image morph is gone. */
 /* ---------- reduce motion: the video ---------- */
 /* Collapsing animation-duration cannot pause a <video>, so the largest source
    of motion on the page ignored the toggle. Hiding it falls back to the poster
