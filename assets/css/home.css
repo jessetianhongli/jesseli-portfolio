@@ -37,6 +37,7 @@
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
+  animation-timeline: auto !important;
 }
 
 /* ---------- hero ---------- */
@@ -55,6 +56,8 @@
 .hero-skyline {
   position: absolute; inset: -20px; z-index: 0; overflow: hidden;
   filter: blur(6px) saturate(1.1);
+  /* the video's own poster, so hiding the video still leaves the skyline */
+  background: url(../media/toronto-poster.jpg) center 65% / cover no-repeat;
 }
 .hero-skyline video {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -273,3 +276,45 @@
 /* Keyed to the file, not card order, so reordering the grid can't misalign these. */
 .work-preview img[src*="winterview"] { object-position: top center; }
 .work-preview img[src*="dyne"] { object-position: center; }
+
+/* ---------- reveal, driven by scroll position ---------- */
+/* The base rule above animates on load, which means anything below the fold has
+   finished before it is ever seen. Where the browser supports a view timeline,
+   drive each element from its own entry into the viewport instead. The stagger
+   moves from animation-delay (meaningless on a scroll timeline) to a staggered
+   animation-range, so the cards still cascade. */
+@supports (animation-timeline: view()) {
+  .section-title, .work-card, .about-quote, .about-body, .stat {
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%;
+    animation-delay: 0s;
+  }
+  .work-card:nth-child(1) { animation-range: entry 5% cover 26%; }
+  .work-card:nth-child(2) { animation-range: entry 9% cover 30%; }
+  .work-card:nth-child(3) { animation-range: entry 13% cover 34%; }
+  .stat:nth-child(1) { animation-range: entry 5% cover 24%; }
+  .stat:nth-child(2) { animation-range: entry 8% cover 27%; }
+  .stat:nth-child(3) { animation-range: entry 11% cover 30%; }
+  .stat:nth-child(4) { animation-range: entry 14% cover 33%; }
+}
+
+/* ---------- work card hover ---------- */
+/* The preview already clips, so the screenshot can drift under it. */
+.work-preview img { transition: transform 0.45s cubic-bezier(.2, .7, .3, 1); }
+.work-card:hover .work-preview img,
+.work-card:focus-visible .work-preview img { transform: scale(1.04); }
+
+/* ---------- page transitions ---------- */
+/* The card's screenshot and the case study's banner are the same file, so naming
+   both lets the browser morph one into the other across the navigation. */
+.work-preview img[src*="winterview"] { view-transition-name: shot-winterview; }
+.work-preview img[src*="dyne"] { view-transition-name: shot-dyne; }
+
+/* ---------- reduce motion: the video ---------- */
+/* Collapsing animation-duration cannot pause a <video>, so the largest source
+   of motion on the page ignored the toggle. Hiding it falls back to the poster
+   frame already painted behind it, and keeps this page script-free. */
+.motion-toggle-input:checked ~ .page-body .hero-skyline video { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-skyline video { display: none; }
+}

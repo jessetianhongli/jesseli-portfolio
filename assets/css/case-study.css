@@ -3,7 +3,7 @@
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
 /* The frame is wide, but prose stays at a readable measure rather than running the
    full 1080px; headings, meta and the outcome grid still span the whole width. */
-.section p, .section li { max-width: 78ch; }
+.section p, .section li { max-width: var(--measure); }
 
 .head { padding: 64px 0 40px; }
 .head-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: oklch(0.65 0.02 250); margin: 0 0 18px; }
@@ -53,7 +53,7 @@
 /* ---------- the short version ---------- */
 .tldr { border-left: 3px solid var(--accent1); padding-left: 22px; margin: 0 0 6px; }
 .tldr dt { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.6 0.02 250); }
-.tldr dd { margin: 3px 0 14px; font-size: 16px; line-height: 1.6; color: oklch(0.9 0.01 250); max-width: 70ch; }
+.tldr dd { margin: 3px 0 14px; font-size: 16px; line-height: 1.6; color: oklch(0.9 0.01 250); max-width: var(--measure); }
 .tldr dd:last-child { margin-bottom: 0; }
 
 /* ---------- "what I got wrong" ---------- */
@@ -113,9 +113,9 @@
 #rf-ex:focus-visible    ~ .swap-switch label[for="rf-ex"] { outline: 2px solid var(--accent1); outline-offset: 3px; }
 
 /* copy and single-bullet panes */
-.swap-copy { margin: 0 0 14px; font-size: 16px; line-height: 1.65; color: oklch(0.88 0.01 250); max-width: 68ch; }
-.mock-bullet { margin: 0; font-size: 16px; line-height: 1.65; color: oklch(0.92 0.01 250); max-width: 68ch; }
-.mock-bullet::before { content: '‚2'; color: var(--accent1); font-weight: 700; margin-right: 10px; }
+.swap-copy { margin: 0 0 14px; font-size: 16px; line-height: 1.65; color: oklch(0.88 0.01 250); max-width: var(--measure); }
+.mock-bullet { margin: 0; font-size: 16px; line-height: 1.65; color: oklch(0.92 0.01 250); max-width: var(--measure); }
+.mock-bullet::before { content: '\2022'; color: var(--accent1); font-weight: 700; margin-right: 10px; }
 
 /* the mock form inside the Winterview demo */
 .mock-field { margin-bottom: 14px; }
@@ -154,3 +154,9 @@
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   color: oklch(0.16 0.02 255); background: var(--accent1); border: 0; cursor: pointer;
 }
+
+/* ---------- page transitions ---------- */
+/* Matches the name on the home page's card image so the two morph. Only the
+   banner figure is a direct child of .wrap, so this can't catch a body image. */
+.wrap > .shot img[src*="winterview/hero-resume-feature"] { view-transition-name: shot-winterview; }
+.wrap > .shot img[src*="dyne/hero-meetup-feature"] { view-transition-name: shot-dyne; }
