@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "perl",
+      "runtimeArgs": [".claude/serve.pl", "8099", "."],
+      "port": 8099
+    }
+  ]
+}
