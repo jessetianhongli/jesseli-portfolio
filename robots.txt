@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /work/zemoso-engagement-flow-builder/
+Sitemap: https://jesseli.design/sitemap.xml

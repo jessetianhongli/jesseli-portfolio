@@ -5,13 +5,48 @@
   var links = document.querySelectorAll('a.shot-zoom');
   if (!links.length) return;
 
-  var box = null, lastFocus = null;
+  var box = null, lastFocus = null, lockedScrollY = 0;
+  // Measured before shipping: CSS overflow:hidden on <html>/<body> does NOT
+  // reliably block window.scrollBy in every engine (verified here - it did not).
+  // Pinning body out of flow with position:fixed does, because there is then
+  // nothing left for the document to scroll.
+  var savedBodyStyle = {};
+
+  function lockScroll() {
+    var body = document.body, s = body.style;
+    savedBodyStyle = { position: s.position, top: s.top, left: s.left, right: s.right, width: s.width, overflow: s.overflow, paddingRight: s.paddingRight };
+    var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    lockedScrollY = window.scrollY;
+    s.position = 'fixed';
+    s.top = (-lockedScrollY) + 'px';
+    s.left = '0';
+    s.right = '0';
+    s.width = '100%';
+    s.overflow = 'hidden';
+    if (scrollbarWidth > 0) {
+      var current = parseFloat(getComputedStyle(body).paddingRight) || 0;
+      s.paddingRight = (current + scrollbarWidth) + 'px';
+    }
+  }
+
+  function unlockScroll() {
+    var s = document.body.style;
+    s.position = savedBodyStyle.position;
+    s.top = savedBodyStyle.top;
+    s.left = savedBodyStyle.left;
+    s.right = savedBodyStyle.right;
+    s.width = savedBodyStyle.width;
+    s.overflow = savedBodyStyle.overflow;
+    s.paddingRight = savedBodyStyle.paddingRight || '';
+    window.scrollTo(0, lockedScrollY);
+  }
 
   function close() {
-    if (!box) return;
+    if (!box) return; // guards a double-close (e.g. Escape fired twice) from double-restoring
     box.parentNode.removeChild(box);
     box = null;
     document.removeEventListener('keydown', onKey);
+    unlockScroll();
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
@@ -27,6 +62,7 @@
 
   function open(href, alt) {
     lastFocus = document.activeElement;
+    lockScroll();
 
     box = document.createElement('div');
     box.className = 'lightbox';

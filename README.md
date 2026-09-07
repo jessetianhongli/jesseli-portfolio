@@ -62,8 +62,12 @@ then visit `http://localhost:8080/`.
   +29% adoption and 25+ features, with no page behind it.
 - **Compress the images.** The Dyne screenshots are roughly 19MB and are 4096px wide serving a 952px
   container. Re-export around 1600px.
-- **Add a favicon.** There isn't one.
 - **Check the résumé against the case studies.** A few numbers disagree — see the notes below.
+
+Already done: favicon, `robots.txt` and `sitemap.xml` (Zemoso excluded and noindexed), absolute
+`og:image`/canonical/`twitter:card` on every page, a `<main>` landmark on all six pages, headings on
+every section (including the two that were previously unlabeled), a unified hidden-content technique
+for the skip link, and a scroll lock on the case-study lightbox.
 
 ## Known inconsistencies
 

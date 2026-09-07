@@ -145,10 +145,10 @@
 .work-card:nth-child(1) { animation-delay: 0s; }
 .work-card:nth-child(2) { animation-delay: 0.12s; }
 .work-card:nth-child(3) { animation-delay: 0.24s; }
-.stat:nth-child(1) { animation-delay: 0s; }
-.stat:nth-child(2) { animation-delay: 0.08s; }
-.stat:nth-child(3) { animation-delay: 0.16s; }
-.stat:nth-child(4) { animation-delay: 0.24s; }
+.stat:nth-of-type(1) { animation-delay: 0s; }
+.stat:nth-of-type(2) { animation-delay: 0.08s; }
+.stat:nth-of-type(3) { animation-delay: 0.16s; }
+.stat:nth-of-type(4) { animation-delay: 0.24s; }
 
 /* ---------- work ---------- */
 .work { padding: 140px clamp(20px, 5vw, 64px) 100px; max-width: 1440px; margin: 0 auto; }
@@ -217,7 +217,7 @@
 .stat {
   padding: 44px 20px; text-align: center; border-left: 1px solid oklch(0.97 0.008 255 / 0.12);
 }
-.stat:first-child { border-left: none; }
+.stat:first-of-type { border-left: none; }
 .stat-value { font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--accent1); }
 .stat-label { margin-top: 6px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.65 0.02 250); }
 
@@ -292,10 +292,10 @@
   .work-card:nth-child(1) { animation-range: entry 5% cover 26%; }
   .work-card:nth-child(2) { animation-range: entry 9% cover 30%; }
   .work-card:nth-child(3) { animation-range: entry 13% cover 34%; }
-  .stat:nth-child(1) { animation-range: entry 5% cover 24%; }
-  .stat:nth-child(2) { animation-range: entry 8% cover 27%; }
-  .stat:nth-child(3) { animation-range: entry 11% cover 30%; }
-  .stat:nth-child(4) { animation-range: entry 14% cover 33%; }
+  .stat:nth-of-type(1) { animation-range: entry 5% cover 24%; }
+  .stat:nth-of-type(2) { animation-range: entry 8% cover 27%; }
+  .stat:nth-of-type(3) { animation-range: entry 11% cover 30%; }
+  .stat:nth-of-type(4) { animation-range: entry 14% cover 33%; }
 }
 
 /* ---------- work card hover ---------- */
