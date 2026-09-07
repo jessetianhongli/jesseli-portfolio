@@ -5,6 +5,10 @@
 :root {
   --accent1: #4ea8ff;
   --accent2: #a855f7;
+  /* Reading measure. Space Grotesk averages ~8.3px per glyph at 17px while the
+     ch unit is the 10.9px "0", so 78ch was rendering ~103 characters per line.
+     56ch lands around 74 - inside the comfortable 45-75 range. */
+  --measure: 56ch;
 }
 
 body {
@@ -110,7 +114,7 @@ button:focus-visible,
 
 /* ---------- 404 ---------- */
 .notfound { max-width: 720px; margin: 0 auto; padding: clamp(70px, 16vh, 160px) clamp(20px, 5vw, 64px); text-align: center; }
-.notfound-code { font-size: clamp(4rem, 18vw, 9rem); line-height: 1; margin: 0 0 14px; color: var(--accent1); }
+.notfound .notfound-code { font-size: clamp(4rem, 18vw, 9rem); line-height: 1; margin: 0 0 14px; color: var(--accent1); }
 .notfound h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin: 0 0 16px; }
 .notfound p { font-size: 17px; line-height: 1.7; color: oklch(0.82 0.015 250); margin: 0 auto 32px; max-width: 46ch; }
 .notfound-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }

@@ -56,6 +56,8 @@
 .hero-skyline {
   position: absolute; inset: -20px; z-index: 0; overflow: hidden;
   filter: blur(6px) saturate(1.1);
+  /* the video's own poster, so hiding the video still leaves the skyline */
+  background: url(../media/toronto-poster.jpg) center 65% / cover no-repeat;
 }
 .hero-skyline video {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -307,3 +309,12 @@
    both lets the browser morph one into the other across the navigation. */
 .work-preview img[src*="winterview"] { view-transition-name: shot-winterview; }
 .work-preview img[src*="dyne"] { view-transition-name: shot-dyne; }
+
+/* ---------- reduce motion: the video ---------- */
+/* Collapsing animation-duration cannot pause a <video>, so the largest source
+   of motion on the page ignored the toggle. Hiding it falls back to the poster
+   frame already painted behind it, and keeps this page script-free. */
+.motion-toggle-input:checked ~ .page-body .hero-skyline video { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-skyline video { display: none; }
+}

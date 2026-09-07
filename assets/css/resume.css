@@ -22,7 +22,7 @@
 .r-dates { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.62 0.02 250); white-space: nowrap; }
 .r-role { font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.7 0.02 250); margin: 0 0 12px; }
 .r-job ul { margin: 0; padding-left: 20px; }
-.r-job li { font-size: 16px; line-height: 1.7; color: oklch(0.87 0.01 250); margin-bottom: 7px; max-width: 72ch; }
+.r-job li { font-size: 16px; line-height: 1.7; color: oklch(0.87 0.01 250); margin-bottom: 7px; max-width: var(--measure); }
 .r-job li:last-child { margin-bottom: 0; }
 .r-casestudy { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--accent1); border-bottom: 2px solid var(--accent1); padding-bottom: 2px; }
 
