@@ -157,3 +157,18 @@
 
 /* Per-image view-transition morph was tried and removed - see home.css's
    "page transitions" comment. The site-wide crossfade from base.css still runs. */
+
+/* ---------- closing CTA ---------- */
+/* A recurring block (same heading, callback body per project) rather than a
+   one-off, matching the "what didn't work" pattern elsewhere on these pages. */
+.cta-block h2 { margin-bottom: 12px; }
+.cta-block p { max-width: var(--measure); }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
+  padding: 14px 26px; font-weight: 700; font-size: 14px; letter-spacing: 0.03em;
+  border: 2px solid oklch(0.97 0.008 255);
+  background: var(--accent1); color: oklch(0.16 0.02 255);
+  box-shadow: 6px 6px 0 var(--accent2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cta-btn:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--accent2); }
