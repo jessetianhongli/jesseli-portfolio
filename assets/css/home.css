@@ -275,33 +275,49 @@
 .work-preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- work card previews: looping screen-flow filmstrip ---------- */
-/* Each project's real screens, laid end to end. The track holds two copies of
-   the same composite image back to back, so travelling exactly one image-width
-   (-50% of the track) loops seamlessly with no jump cut.
-   Motion reads as someone clicking through the flow, not a conveyor belt: settle
-   on a screen, then snap to the next with an eased step. Step positions are the
-   panel boundaries within one copy of the image (so -50% divided into N panels). */
+/* Each project's real screens, laid end to end. Dyne's track holds two copies
+   of one wide composite back to back, so travelling one image-width (-50% of
+   the track) loops seamlessly. Winterview instead uses separate per-screen
+   files (cropped from that same original composite - easier to keep each
+   screen legible and to redact text in just one of them) plus a trailing
+   duplicate of its first image, so 4 equal flex items loop at -75% (3/4 of
+   the track), landing back on a copy of the true first frame with no jump.
+   Motion reads as someone clicking through the flow, not a conveyor belt:
+   settle on a screen, then snap to the next with an eased step. */
 /* Inset slightly so each project's brand tint reads as a backdrop the real
    screens sit on, instead of bleeding to the card edge like the plain shots do. */
-.work-preview.has-shot.work-flow { padding: 16px; }
-.work-flow-winterview { background: oklch(0.53 0.17 258); }
+.work-preview.has-shot.work-flow { padding: 16px; container-type: inline-size; }
+.work-flow-winterview { background: oklch(0.53 0.12 258); }
 .work-flow-dyne { background: oklch(0.55 0.18 25); }
 .work-flow-track {
   display: flex; height: 100%; width: max-content;
   animation-iteration-count: infinite;
 }
-/* The trailing margin is the gap between screens (and, since both copies get
+/* Each slide is 80% of the card's own width (80cqw, resolved against the
+   .work-flow container regardless of the track's own auto width) with the
+   real image centered inside via object-fit: contain - so a screen narrower
+   or wider than the card is never left stranded against one edge.
+   Narrower than the card on purpose: the current screen sits centered with a
+   sliver of the previous and next screen peeking in on either side, so the
+   motion still reads as a filmstrip rather than one screen replacing another.
+   Every keyframe below adds +10cqw (half of the 20cqw left on the table) to
+   shift that centered screen into the middle of the card instead of flush
+   against its left edge.
+   The trailing margin is the gap between screens (and, since both copies get
    it identically, also the gap at the seam between the two copies) - it
    doesn't disturb the -50% loop math below because both copies still end up
-   exactly the same width as each other. It also swallows the sub-pixel
-   rounding on each image's auto width, which used to show as a hairline of
-   the card's background color at the seam.
+   exactly the same width as each other.
    Sized per project, not shared: Winterview's desktop screenshots render
    roughly 2.4x wider than Dyne's phone frames at the same card height, so the
    same px gap reads as tight on one and cavernous on the other. */
-.work-flow-track img { width: auto; height: 100%; flex: none; object-fit: unset; }
-.work-flow-winterview .work-flow-track img { margin-right: 22px; }
-.work-flow-dyne .work-flow-track img { margin-right: 9px; }
+.work-flow-track img { width: 80cqw; height: 100%; flex: none; object-fit: contain; object-position: center; border-radius: 6px; }
+.work-flow-winterview .work-flow-track img { margin-right: 22px; border-radius: 9px; }
+/* Dyne's screens are portrait phones inside this landscape card, so
+   object-fit: contain (the shared default) always leaves visible backdrop on
+   either side to show the whole phone without cropping. Cover fills the
+   slide edge to edge instead, trading a shaved sliver off the top and bottom
+   of each phone for a screen that actually reads at a useful size. */
+.work-flow-dyne .work-flow-track img { margin-right: 9px; object-fit: cover; }
 .work-flow-winterview .work-flow-track { animation-name: workFlowStep3; animation-duration: 8s; }
 .work-flow-dyne .work-flow-track { animation-name: workFlowStep4; animation-duration: 7s; }
 
@@ -309,20 +325,34 @@
    comes from the curve instead: a gentle, front-loaded deceleration into each
    arrival (steep at first, long soft tail) rather than a mechanical linear
    slide, so the stop feels settled instead of snapped. */
-/* 3 equal panels: hold, eased step, hold, eased step, hold, step-to-loop. */
+/* Winterview: the peek means every held frame shows a sliver of its
+   neighbours, so a single trailing duplicate isn't enough any more - at the
+   loop point the "next" and "previous" slivers would have nothing to show
+   and the peek would flicker to empty once per cycle. The track instead
+   holds the 3 real screens twice, rotated one step (download, improve,
+   clarify, download, improve, clarify) so every one of the 4 held positions
+   below (sixths of this 6-item track) has real neighbours on both sides,
+   including the one the loop resets from - that frame and the first frame
+   are pixel-identical, peek slivers included, so the reset is invisible. */
 @keyframes workFlowStep3 {
-  0%, 24%   { transform: translateX(0%); }
-  33.333%, 57.333% { transform: translateX(-16.667%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  66.667%, 90.667% { transform: translateX(-33.333%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  100%      { transform: translateX(-50%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  0%, 16%   { transform: translateX(calc(-16.667% + 10cqw)); }
+  26%, 42%  { transform: translateX(calc(-33.333% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  52%, 68%  { transform: translateX(calc(-50% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  78%, 100% { transform: translateX(calc(-66.667% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
 }
-/* 4 equal panels: same rhythm, one more step. */
+/* Dyne: same seamless-peek approach as Winterview, sized for 4 real screens.
+   Track is [date, location, coupon, invite, date, location, coupon] (7 items:
+   the natural 4-screen order, rotated one step so "location" lands on the
+   first held position, plus enough repeated screens at each end to give
+   every hold a real neighbour on both sides). Holds sit at sevenths of the
+   track; the last hold (index 5, "location" again) is pixel-identical to the
+   first, so the loop reset is invisible. */
 @keyframes workFlowStep4 {
-  0%, 18%   { transform: translateX(0%); }
-  25%, 43%  { transform: translateX(-12.5%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  50%, 68%  { transform: translateX(-25%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  75%, 93%  { transform: translateX(-37.5%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  100%      { transform: translateX(-50%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  0%, 12%   { transform: translateX(calc(-14.286% + 10cqw)); }
+  20%, 32%  { transform: translateX(calc(-28.571% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  40%, 52%  { transform: translateX(calc(-42.857% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  60%, 72%  { transform: translateX(calc(-57.143% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  80%, 100% { transform: translateX(calc(-71.429% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
 }
 /* ---------- reveal, driven by scroll position ---------- */
 /* The base rule above animates on load, which means anything below the fold has
