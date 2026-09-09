@@ -15,10 +15,10 @@ my %mime = (
 );
 
 my $srv = IO::Socket::INET->new(
-  LocalAddr=>'127.0.0.1', LocalPort=>$port, Listen=>50, ReuseAddr=>1, Proto=>'tcp'
+  LocalAddr=>'0.0.0.0', LocalPort=>$port, Listen=>50, ReuseAddr=>1, Proto=>'tcp'
 ) or die "cannot bind port $port: $!\n";
 $| = 1;
-print "serving '$root' at http://127.0.0.1:$port/\n";
+print "serving '$root' at http://127.0.0.1:$port/ (also reachable on your LAN IP)\n";
 
 sub slurp { my $p=shift; open(my $fh,'<:raw',$p) or return; local $/; my $d=<$fh>; close $fh; return $d }
 

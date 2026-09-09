@@ -273,10 +273,57 @@
    so the image can bleed to the card edges. */
 .work-preview.has-shot { display: block; padding: 0; }
 .work-preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
-/* Keyed to the file, not card order, so reordering the grid can't misalign these. */
-.work-preview img[src*="winterview"] { object-position: top center; }
-.work-preview img[src*="dyne"] { object-position: center; }
 
+/* ---------- work card previews: looping screen-flow filmstrip ---------- */
+/* Each project's real screens, laid end to end. The track holds two copies of
+   the same composite image back to back, so travelling exactly one image-width
+   (-50% of the track) loops seamlessly with no jump cut.
+   Motion reads as someone clicking through the flow, not a conveyor belt: settle
+   on a screen, then snap to the next with an eased step. Step positions are the
+   panel boundaries within one copy of the image (so -50% divided into N panels). */
+/* Inset slightly so each project's brand tint reads as a backdrop the real
+   screens sit on, instead of bleeding to the card edge like the plain shots do. */
+.work-preview.has-shot.work-flow { padding: 16px; }
+.work-flow-winterview { background: oklch(0.53 0.17 258); }
+.work-flow-dyne { background: oklch(0.55 0.18 25); }
+.work-flow-track {
+  display: flex; height: 100%; width: max-content;
+  animation-iteration-count: infinite;
+}
+/* The trailing margin is the gap between screens (and, since both copies get
+   it identically, also the gap at the seam between the two copies) - it
+   doesn't disturb the -50% loop math below because both copies still end up
+   exactly the same width as each other. It also swallows the sub-pixel
+   rounding on each image's auto width, which used to show as a hairline of
+   the card's background color at the seam.
+   Sized per project, not shared: Winterview's desktop screenshots render
+   roughly 2.4x wider than Dyne's phone frames at the same card height, so the
+   same px gap reads as tight on one and cavernous on the other. */
+.work-flow-track img { width: auto; height: 100%; flex: none; object-fit: unset; }
+.work-flow-winterview .work-flow-track img { margin-right: 22px; }
+.work-flow-dyne .work-flow-track img { margin-right: 9px; }
+.work-flow-winterview .work-flow-track { animation-name: workFlowStep3; animation-duration: 8s; }
+.work-flow-dyne .work-flow-track { animation-name: workFlowStep4; animation-duration: 7s; }
+
+/* A literal blur filter read as a glitch, not polish - dropped. Smoothness
+   comes from the curve instead: a gentle, front-loaded deceleration into each
+   arrival (steep at first, long soft tail) rather than a mechanical linear
+   slide, so the stop feels settled instead of snapped. */
+/* 3 equal panels: hold, eased step, hold, eased step, hold, step-to-loop. */
+@keyframes workFlowStep3 {
+  0%, 24%   { transform: translateX(0%); }
+  33.333%, 57.333% { transform: translateX(-16.667%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  66.667%, 90.667% { transform: translateX(-33.333%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  100%      { transform: translateX(-50%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+}
+/* 4 equal panels: same rhythm, one more step. */
+@keyframes workFlowStep4 {
+  0%, 18%   { transform: translateX(0%); }
+  25%, 43%  { transform: translateX(-12.5%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  50%, 68%  { transform: translateX(-25%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  75%, 93%  { transform: translateX(-37.5%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  100%      { transform: translateX(-50%); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+}
 /* ---------- reveal, driven by scroll position ---------- */
 /* The base rule above animates on load, which means anything below the fold has
    finished before it is ever seen. Where the browser supports a view timeline,
@@ -303,6 +350,10 @@
 .work-preview img { transition: transform 0.45s cubic-bezier(.2, .7, .3, 1); }
 .work-card:hover .work-preview img,
 .work-card:focus-visible .work-preview img { transform: scale(1.04); }
+/* The filmstrip pauses on hover instead of zooming - a per-image scale would
+   pull the two flex-adjacent copies out of alignment and show a seam. */
+.work-card:hover .work-flow-track img,
+.work-card:focus-visible .work-flow-track img { transform: none; }
 
 /* ---------- page transitions ---------- */
 /* Tried naming the card image and the case-study banner the same, so the browser
