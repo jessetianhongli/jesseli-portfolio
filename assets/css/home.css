@@ -315,14 +315,46 @@
    same px gap reads as tight on one and cavernous on the other. */
 .work-flow-track img { width: 80cqw; height: 100%; flex: none; object-fit: contain; object-position: center; border-radius: 6px; }
 .work-flow-winterview .work-flow-track img { margin-right: 22px; border-radius: 9px; }
-/* Dyne's screens are portrait phones inside this landscape card, so
-   object-fit: contain (the shared default) always leaves visible backdrop on
-   either side to show the whole phone without cropping. Cover fills the
-   slide edge to edge instead, trading a shaved sliver off the top and bottom
-   of each phone for a screen that actually reads at a useful size. */
-.work-flow-dyne .work-flow-track img { margin-right: 9px; object-fit: cover; }
+/* Dyne's screens are portrait phones inside this landscape card. At the
+   shared 80cqw slide width, object-fit: contain renders each phone at only
+   ~23cqw (height-limited by its own aspect ratio), leaving so much empty
+   backdrop either side of it that the next/previous phone never reaches the
+   slide's edge to actually peek in. Sizing the slide to the phone's own
+   rendered width instead removes that dead space, so neighbouring screens
+   sit close enough to show a real sliver of themselves. */
+.work-flow-dyne .work-flow-track img { width: auto; margin-right: 9px; }
 .work-flow-winterview .work-flow-track { animation-name: workFlowStep3; animation-duration: 8s; }
 .work-flow-dyne .work-flow-track { animation-name: workFlowStep4; animation-duration: 7s; }
+
+/* Vignette: fades the peeking previous/next screen into the card's own tint at
+   either edge, so whichever screen is centered at a given moment reads as the
+   one in focus rather than several equally-weighted screens side by side. Pure
+   position, not animation state, so it holds up regardless of where the track
+   currently is. Extra stops ease the falloff (slow at first, faster through
+   the middle of the fade, slow again into transparent) instead of a flat
+   linear ramp, so the edge reads as a soft vignette rather than a hard line. */
+.work-flow-dyne::after,
+.work-flow-winterview::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.work-flow-dyne::after {
+  background: linear-gradient(to right,
+    oklch(0.55 0.18 25) 0%, oklch(0.55 0.18 25 / 0.85) 3%,
+    oklch(0.55 0.18 25 / 0.45) 8%, oklch(0.55 0.18 25 / 0.12) 13%,
+    oklch(0.55 0.18 25 / 0) 19%,
+    oklch(0.55 0.18 25 / 0) 81%,
+    oklch(0.55 0.18 25 / 0.12) 87%, oklch(0.55 0.18 25 / 0.45) 92%,
+    oklch(0.55 0.18 25 / 0.85) 97%, oklch(0.55 0.18 25) 100%);
+}
+.work-flow-winterview::after {
+  background: linear-gradient(to right,
+    oklch(0.53 0.12 258) 0%, oklch(0.53 0.12 258 / 0.85) 3%,
+    oklch(0.53 0.12 258 / 0.45) 8%, oklch(0.53 0.12 258 / 0.12) 13%,
+    oklch(0.53 0.12 258 / 0) 19%,
+    oklch(0.53 0.12 258 / 0) 81%,
+    oklch(0.53 0.12 258 / 0.12) 87%, oklch(0.53 0.12 258 / 0.45) 92%,
+    oklch(0.53 0.12 258 / 0.85) 97%, oklch(0.53 0.12 258) 100%);
+}
 
 /* A literal blur filter read as a glitch, not polish - dropped. Smoothness
    comes from the curve instead: a gentle, front-loaded deceleration into each
@@ -344,18 +376,28 @@
   78%, 100% { transform: translateX(calc(-66.667% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
 }
 /* Dyne: same seamless-peek approach as Winterview, sized for 4 real screens.
-   Track is [date, location, coupon, invite, date, location, coupon] (7 items:
-   the natural 4-screen order, rotated one step so "location" lands on the
-   first held position, plus enough repeated screens at each end to give
-   every hold a real neighbour on both sides). Holds sit at sevenths of the
-   track; the last hold (index 5, "location" again) is pixel-identical to the
-   first, so the loop reset is invisible. */
+   Track is [date, location, coupon, invite] repeated 3 times (12 items).
+   Sizing each slide to the phone itself (rather than Winterview's fixed
+   80cqw) packs enough screens into the card that 3-4 are visible at once,
+   not just one neighbour peeking on either side - so a single repeat of the
+   4-screen cycle isn't enough buffer any more. Holding on the middle
+   repeat (indices 4-7: date, location, coupon, invite) leaves two full
+   repeats of real screens as buffer on each side, so every simultaneously
+   visible slot - however many that turns out to be at a given card width -
+   is always a real, correctly-ordered screen instead of running out and
+   popping in empty. Holds sit at twelfths of the track; the last hold
+   (index 8, "date" again) is pixel-identical to the first (index 4), so the
+   loop reset is invisible.
+   Centering offset is half the leftover space in the slide's own container
+   (100cqw - the phone's ~23cqw rendered width, halved) rather than Winterview's
+   10cqw, since these slides are sized to the phone itself instead of a fixed
+   80cqw. */
 @keyframes workFlowStep4 {
-  0%, 12%   { transform: translateX(calc(-14.286% + 10cqw)); }
-  20%, 32%  { transform: translateX(calc(-28.571% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  40%, 52%  { transform: translateX(calc(-42.857% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  60%, 72%  { transform: translateX(calc(-57.143% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
-  80%, 100% { transform: translateX(calc(-71.429% + 10cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  0%, 12%   { transform: translateX(calc(-33.333% + 38.5cqw)); }
+  20%, 32%  { transform: translateX(calc(-41.667% + 38.5cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  40%, 52%  { transform: translateX(calc(-50% + 38.5cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  60%, 72%  { transform: translateX(calc(-58.333% + 38.5cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+  80%, 100% { transform: translateX(calc(-66.667% + 38.5cqw)); animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
 }
 /* ---------- reveal, driven by scroll position ---------- */
 /* The base rule above animates on load, which means anything below the fold has
