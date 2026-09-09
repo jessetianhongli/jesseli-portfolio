@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "perl",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\perl.exe",
       "runtimeArgs": [".claude/serve.pl", "8099", "."],
       "port": 8099
     }
