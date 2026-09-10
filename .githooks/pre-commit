@@ -1,0 +1,21 @@
+#!/bin/sh
+# Blocks commits that contain unresolved merge-conflict markers
+# (this is how CNAME ended up broken and took the site down with a 404).
+
+files=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$files" ] && exit 0
+
+found=0
+for f in $files; do
+  if grep -Iq '^<<<<<<< \|^=======$\|^>>>>>>> ' "$f" 2>/dev/null; then
+    echo "error: unresolved merge conflict markers in $f"
+    found=1
+  fi
+done
+
+if [ "$found" = "1" ]; then
+  echo "Fix the conflict markers above before committing."
+  exit 1
+fi
+
+exit 0

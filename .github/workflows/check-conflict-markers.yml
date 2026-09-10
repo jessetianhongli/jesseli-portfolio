@@ -1,0 +1,21 @@
+name: Check for merge conflict markers
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for unresolved conflict markers
+        run: |
+          if grep -RIl --exclude-dir=.git -E '^(<<<<<<< |=======$|>>>>>>> )' .; then
+            echo "::error::Unresolved merge conflict markers found in the files listed above."
+            exit 1
+          fi
+          echo "No conflict markers found."
